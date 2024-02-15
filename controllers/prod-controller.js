@@ -1,5 +1,4 @@
 const {validationResult}=require("express-validator");
-let products_array=require('../Api.js');
 const pmodel=require("../models/products.js");
 const HTTP=require("../Response.js");
 const runningServer=()=>{
@@ -10,8 +9,8 @@ const Getalldata= async (req,res)=>{
    
     try{
         // pagination
-        const limit=req.query.limit;
-        const page=req.query.page;
+        const limit=req.query.limit || 10;
+        const page=req.query.page || 1;
         const skip=(page -1 )*limit
 
         const get = await pmodel.find().limit(limit).skip(skip)

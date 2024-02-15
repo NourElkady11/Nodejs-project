@@ -60,30 +60,6 @@ app.all("*",(req,res)=>{
     //in case wrong routeee
 })  
 
-// ?keda m4 hayro7 ydawar fel router 8eer lama yakon feeh fel request /api 3l 2a2al
-
-// const url="mongodb+srv://nourel2ady11:elkady123@collection-cluster.zxufrnz.mongodb.net/?retryWrites=true&w=majority"
-// const client =new MongoClient(url);
-
-// async function DatabaseConection(){
-
-//     await client.connect();
-//     const db=client.db("kady-Database"); 
-//     const colliction =db.collection("Test");
-    // const data =await colliction.find().toArray();
-//     const data =await colliction.insertOne({
-//     })
-//     console.log(data);
-// }
-// DatabaseConection()  
-
-     
-
-
-
-// todo hghghghghghghghghghghghhghghghghghghg
-
-  
 // const eventcreator=require("node:events");
 // const { type } = require("node:os");
 // const http=require("node:http");
