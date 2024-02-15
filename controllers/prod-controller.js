@@ -45,9 +45,10 @@ const Getalldata= async (req,res)=>{
 const gettingSingleprod=async(req,res)=>{
 
     try{
+        const tittle=req.body.tittle;
 
         const get = await pmodel.find({
-            tittle: "iphone-8"
+            tittle: tittle
         }).select({"_id":0,"price":1})
 
         if(get.length==0){

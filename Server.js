@@ -59,7 +59,6 @@ app.all("*",(req,res)=>{
     res.status(404).json({"message":"Not Found"})
     //in case wrong routeee
 })  
-
 // const eventcreator=require("node:events");
 // const { type } = require("node:os");
 // const http=require("node:http");
