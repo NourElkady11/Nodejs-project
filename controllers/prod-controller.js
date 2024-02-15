@@ -13,7 +13,7 @@ const Getalldata= async (req,res)=>{
         const page=req.query.page || 1;
         const skip=(page -1 )*limit
 
-        const get = await pmodel.find().limit(limit).skip(skip)
+        const get = await pmodel.find({}).limit(limit).skip(skip)
 
         if(get.length==0){
             res.status(404).json({
