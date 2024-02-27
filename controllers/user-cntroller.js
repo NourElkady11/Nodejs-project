@@ -13,7 +13,6 @@ const app = express();
 const generator = require('generate-password');
 
 
-
 const getallusers= async(req,res)=>{
     const get=await usermodel.find({},{"__v":false})
     res.json(get)
@@ -97,39 +96,57 @@ const register= async(req,res)=>{
 
                     if(newuser.username.length==0){
                         res.status(400).json({
-                            message:"Please enter your username"
+                            msg:"Please enter your username"
                         })
                     }
                     else if(newuser.password.length==0){
                         res.status(400).json({
-                            message:"Please enter your password"
+                            msg:"Please enter your password"
                         })
                     }  
                     if(newuser.password.length<5){
                         f=0;
-                        res.status(400).json("password must contain at least 5 charcters")
+                        res.status(400).json({
+                            msg:"password must contain at least 5 charcters"
+                        })
                     }
                     if(!validator.matches(newuser.password, /[a-zA-Z]/)){
                         f=0;
-                        res.status(400).json("password must contain letters")
+                        res.status(400).json({
+                            msg:"password must contain letters"
+                        })
     
                     }
                     if(validator.isUppercase(newuser.password)){
                         f=0;
-                        res.status(400).json("password must contain at least 1 lower case")
+                        res.status(400).json({
+                            msg:"password must contain at least 1 lower case"
+                        })
+
                     } 
                     if(validator.isLowercase(newuser.password)){
                         f=0;
-                        res.status(400).json("password must contain at least 1 upper case") 
+                        res.status(400).json({
+                            msg:" password must contain at least 1 upper case"
+                        })
+
+                       
                     } 
                     if(!validator.matches(newuser.password, /[1-9]/)){
                         f=0;
-                        res.status(400).json("password must contain numbers")
+                        res.status(400).json({
+                            msg:"password must contain numbers"
+                        })
+
+                        
     
                     }
                     if(!validator.matches(newuser.password, /[!@#$%^&*(),.?":{}|<>]/)){
                         f=0;
-                        res.status(400).json("password must contain special charcters")
+                        res.status(400).json({
+                            msg:"password must contain special charcters"
+                        })
+                        
                     }
                     if(f==1){
                         const hashedpass=await hashing.hash(newuser.password,15)
@@ -157,16 +174,12 @@ const register= async(req,res)=>{
                                    
                     })
                      
-
                     // res.cookie("token",token,{httpOnly: true })
-                
-
-
                     }
                 }
                 else{
                     res.status(400).json({
-                        message:"this user is already exist in the dataBase",
+                        msg:"this user is already exist in the dataBase",
                         data:[]
                     })  
                 }
@@ -175,11 +188,11 @@ const register= async(req,res)=>{
             {
                 if(newuser.email.length>0){
                     res.status(400).json({
-                        message:"Not valid email",
+                        msg:"Not valid email",
                 })
                 }else if(newuser.email.length==0){
                     res.status(400).json({
-                        message:"please enter your email",
+                        msg:"please enter your email",
                     })
                 }
           
@@ -187,7 +200,7 @@ const register= async(req,res)=>{
         }
         catch{
                 res.status(400).json({
-                    message:" OOPS Data base connection error"
+                    msg:" OOPS Data base connection error"
                 })
         }
         
@@ -212,7 +225,7 @@ const login= async(req,res)=>{
         const user=await usermodel.find({email:logingUser.email},{"__v":false})
         if(user.length==0){
             res.status(400).json({
-                message:"User Not Found",
+                msg:"User Not Found",
         })
         }
         else{   
