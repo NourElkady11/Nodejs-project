@@ -186,7 +186,7 @@ const register= async(req,res)=>{
                                 email:newuser.email,
                                 isadmin:newuser.isadmin
                             },process.env.MYSECRETKEY,{expiresIn:"1h"});
-                            res.status(200).header("Token",token).json({
+                            res.status(200).json({
                                 status:http.SUCCESS,
                                 data:[user],
                                 token:token

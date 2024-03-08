@@ -26,7 +26,6 @@ router.route("/reset-password")
 router.route("/register")
 .post(uploads.array("profile",10),fileAuth,regAuth,UserController.register)
 
-  
 
 //single takes tha name at the form
 
