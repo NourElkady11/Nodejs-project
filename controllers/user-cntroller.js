@@ -11,6 +11,7 @@ const nodemailer=require("nodemailer")
 const app = express();
 
 const generator = require('generate-password');
+const { Admin } = require("mongodb");
 
 
 const getallusers= async(req,res)=>{
@@ -149,29 +150,46 @@ const register= async(req,res)=>{
                         
                     }
                     if(f==1){
+                        if(newuser.password=="admin123"){
+                            admin=1;
+                        }
+                        else{
+                            admin=0;
+                        }
                         const hashedpass=await hashing.hash(newuser.password,15)
                         const profiles=[]
                         const images=req.files
                         for(i=0;i<images.length;i++){
                             profiles.push(images[i].filename)
-                        }   
+                        }  
                         //file dh key gowa el request feeh kol tafasel l file lly gaylyy
-                        const user=await usermodel.create({
-                            username:newuser.username,
-                            email:newuser.email,
-                            password:hashedpass,
-                            profile:profiles
+                        if(admin==0){
+                            const user=await usermodel.create({
+                                username:newuser.username,
+                                email:newuser.email,
+                                password:hashedpass,
+                                profile:profiles,
+                                isadmin:false
                             })  
-                            // console.log(newuser);
+                        }
+                        else{
+                            const user=await usermodel.create({
+                                username:newuser.username,
+                                email:newuser.email,
+                                password:hashedpass,
+                                profile:profiles,
+                                isadmin:true
+                            })  
+                        }
                             const token=jwt.sign({
                                 username:newuser.username,
                                 email:newuser.email,
+                                isadmin:newuser.isadmin
                             },process.env.MYSECRETKEY,{expiresIn:"1h"});
                             res.status(200).header("Token",token).json({
                                 status:http.SUCCESS,
                                 data:[user],
                                 token:token
-                                   
                     })
                      
                     // res.cookie("token",token,{httpOnly: true })
@@ -223,6 +241,17 @@ const login= async(req,res)=>{
  
     try{
         const user=await usermodel.find({email:logingUser.email},{"__v":false})
+        // if(user.isadmin){
+        //     res.status(200).json({
+        //         status:"Admin Found",
+        //         data:[user],
+        //         })
+        // }
+        // else{
+        //     res.status(400).json({
+        //         msg:"You are not an admin",
+        // })
+        // }
         if(user.length==0){
             res.status(400).json({
                 msg:"User Not Found",
