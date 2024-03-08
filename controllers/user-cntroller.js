@@ -189,7 +189,7 @@ const register= async(req,res)=>{
                             res.status(200).json({
                                 status:http.SUCCESS,
                                 data:[user],
-                                token:token
+                                // token:token
                             })
                      
                     // res.cookie("token",token,{httpOnly: true })
