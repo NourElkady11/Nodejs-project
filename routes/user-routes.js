@@ -24,7 +24,8 @@ router.route("/reset-password")
 .post(UserController.resetPassword)
 
 router.route("/register")
-.post(uploads.array("profile",10),fileAuth,regAuth,UserController.register)
+// .post(uploads.array("profile",10),fileAuth,regAuth,UserController.register)
+.post(UserController.register)
 
 
 //single takes tha name at the form
