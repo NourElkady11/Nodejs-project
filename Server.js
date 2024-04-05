@@ -52,8 +52,8 @@ app.listen(process.env.port,()=>{
 
 
 
-app.use(cors());
-app.use(bodyParser.json());
+// app.use(cors());
+// app.use(bodyParser.json());
 app.use(express.json()); 
 app.use("/api",productsrouter);
 app.use("/users",usersRouter)
