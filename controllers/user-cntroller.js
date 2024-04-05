@@ -86,14 +86,8 @@ const resetPassword= async(req,res)=>{
 const register= async(req,res)=>{
     
     let f=1;
-        // newuser={
-        //     username:"nour",
-        //     email:"nour@gmail.com",
-        //     password:"12333"
-        // }
+        const newuser=req.body;
         try{
-            const newuser = await req.body;
-            console.log(newuser);
             if(validator.isEmail(newuser.email))
             {
                 const checkEmails= await usermodel.find({email:newuser.email}) 
