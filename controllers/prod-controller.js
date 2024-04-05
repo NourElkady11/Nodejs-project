@@ -79,7 +79,6 @@ const gettingSingleprod=async(req,res)=>{
 const Addproducts=async(req, res) => { 
      
     try{
-
         const newproduct=req.body;
         const imgs=[]
         const images=req.files
@@ -180,7 +179,6 @@ const DeleteProd= async(req,res)=>{
 
     
 }
-
 module.exports={
     runningServer,
     Addproducts,

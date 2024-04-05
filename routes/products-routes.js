@@ -11,7 +11,7 @@ const uploads=require("../Middlewars/uploadsMiddleware.js");
 router.route("/get")
 .get(controller.Getalldata);
 
- 
+
 router.route("/products")
 .patch(controller.updateProduct)
 .delete(controller.DeleteProd)
