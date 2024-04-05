@@ -87,7 +87,7 @@ app.use(cookieParser())
 const register= async(req,res)=>{
     // console.log(req);
     let f=1;
-        const newuser=req.body;
+        const newuser= await req.body;
         try{
             if(validator.isEmail(newuser.email))
             {
