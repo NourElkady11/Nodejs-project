@@ -87,7 +87,12 @@ const register= async(req,res)=>{
     
     let f=1;
         try{
-            const newuser=req.body;
+            // const newuser=req.body;
+            newuser={
+                username:"nour",
+                email:"nour@gmail.com",
+                password:"kadyyy"
+            }
             console.log(newuser);
             if(validator.isEmail(newuser.email))
             {
