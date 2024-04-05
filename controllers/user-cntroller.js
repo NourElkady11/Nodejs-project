@@ -9,7 +9,6 @@ const { header } = require("express-validator");
 const { log } = require("console");
 const nodemailer=require("nodemailer")
 const app = express();
-
 const generator = require('generate-password');
 const { Admin } = require("mongodb");
 
@@ -87,10 +86,14 @@ const resetPassword= async(req,res)=>{
 const register= async(req,res)=>{
     
     let f=1;
-
-        const newuser= await req.body;
-        console.log(newuser);
+        // newuser={
+        //     username:"nour",
+        //     email:"nour@gmail.com",
+        //     password:"12333"
+        // }
         try{
+            const newuser = await req.body;
+            console.log(newuser);
             if(validator.isEmail(newuser.email))
             {
                 const checkEmails= await usermodel.find({email:newuser.email}) 

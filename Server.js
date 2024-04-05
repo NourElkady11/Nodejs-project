@@ -9,6 +9,7 @@ const cors=require("cors");
 const { Server }=require("socket.io");
 const { createServer } = require('node:http');
 const path = require("node:path");
+const bodyParser = require('body-parser');
 
 require("dotenv").config();
 
@@ -51,7 +52,8 @@ app.listen(process.env.port,()=>{
 
 
 
-// app.use(cors());
+app.use(cors());
+app.use(bodyParser.json());
 app.use(express.json()); 
 app.use("/api",productsrouter);
 app.use("/users",usersRouter)
