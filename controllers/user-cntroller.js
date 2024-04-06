@@ -180,18 +180,18 @@ const register= async(req,res)=>{
                                 profile:profiles,
                                 isadmin:false
                             })  
-                        }
+                        
                         //     const token=jwt.sign({
                         //         username:newuser.username,
                         //         email:newuser.email,
                         //         isadmin:newuser.isadmin
                         //     },process.env.MYSECRETKEY,{expiresIn:"1h"});
-                        //     res.status(200).json({
-                        //         status:http.SUCCESS,
-                        //         data:[user],
-                        //         token:token
-                        //     })
-                        // }
+                            res.status(200).json({
+                                status:http.SUCCESS,
+                                data:[user]
+                                // token:token
+                            })
+                         }
                         else{
                             const user=await usermodel.create({
                                 username:newuser.username,
@@ -200,18 +200,18 @@ const register= async(req,res)=>{
                                 profile:profiles,
                                 isadmin:true
                             }) 
-                        }
+                        
                         //         const token=jwt.sign({
                         //         username:newuser.username,
                         //         email:newuser.email,
                         //         isadmin:newuser.isadmin
                         //     },process.env.MYSECRETKEY,{expiresIn:"1h"});
-                        //     res.status(200).json({
-                        //         status:http.SUCCESS,
-                        //         data:[user],
-                        //         token:token
-                        //     })
-                        // }
+                            res.status(200).json({
+                                status:http.SUCCESS,
+                                data:[user]
+                                // token:token
+                            })
+                         }
                     // res.cookie("token",token,{httpOnly: true })
                     }
                 }
