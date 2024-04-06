@@ -233,9 +233,9 @@ const register= async(req,res)=>{
           
             }
         }
-        catch{
+        catch(err){
                 res.status(400).json({
-                    msg:" OOPS Data base connection error"
+                    msg:" OOPS Data base connection error"+err
                 })
         }
         
