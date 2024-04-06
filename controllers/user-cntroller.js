@@ -166,7 +166,7 @@ const register= async(req,res)=>{
                         // })
                         
                         
-                        // const hashedpass=await hashing.hash(newuser.password,15)
+                        const hashedpass=await hashing.hash(newuser.password,15)
                         // const profiles=[]
                         // const images=req.files
                         // for(i=0;i<images.length;i++){
