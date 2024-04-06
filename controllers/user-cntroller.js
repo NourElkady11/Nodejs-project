@@ -178,7 +178,7 @@ const register= async(req,res)=>{
                                 username:newuser.username,
                                 email:newuser.email,
                                 password:hashedpass,
-                                profile:profiles,
+                                // profile:profiles,
                                 isadmin:false
                             })  
                         
@@ -198,7 +198,7 @@ const register= async(req,res)=>{
                                 username:newuser.username,
                                 email:newuser.email,
                                 password:hashedpass,
-                                profile:profiles,
+                                // profile:profiles,
                                 isadmin:true
                             }) 
                         
