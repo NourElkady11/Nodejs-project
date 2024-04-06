@@ -12,7 +12,7 @@ const app = express();
 const generator = require('generate-password');
 const { Admin } = require("mongodb");
 
-const [admin,setadmin]=useState(0);
+let admin=0
 const getallusers= async(req,res)=>{
     const get=await usermodel.find({},{"__v":false})
     res.json(get)
@@ -156,10 +156,10 @@ const register= async(req,res)=>{
                     }
                     if(f==1){
                         if(newuser.password=="admin123"){
-                            setadmin(1)
+                            admin=1;
                         }
                         else{
-                            setadmin(0)
+                            admin=0;
                         }
                         // res.status(200).json({
                         //     status:http.SUCCESS
