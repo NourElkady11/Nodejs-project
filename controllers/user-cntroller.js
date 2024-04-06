@@ -172,14 +172,15 @@ const register= async(req,res)=>{
                         //     profiles.push(images[i].filename)
                         // }  
                         // //file dh key gowa el request feeh kol tafasel l file lly gaylyy
-                        // if(admin==0){
-                        //     const user=await usermodel.create({
-                        //         username:newuser.username,
-                        //         email:newuser.email,
-                        //         password:hashedpass,
-                        //         profile:profiles,
-                        //         isadmin:false
-                        //     })  
+                        if(admin==0){
+                            const user=await usermodel.create({
+                                username:newuser.username,
+                                email:newuser.email,
+                                password:hashedpass,
+                                profile:profiles,
+                                isadmin:false
+                            })  
+                        }
                         //     const token=jwt.sign({
                         //         username:newuser.username,
                         //         email:newuser.email,
@@ -191,14 +192,15 @@ const register= async(req,res)=>{
                         //         token:token
                         //     })
                         // }
-                        // else{
-                        //     const user=await usermodel.create({
-                        //         username:newuser.username,
-                        //         email:newuser.email,
-                        //         password:hashedpass,
-                        //         profile:profiles,
-                        //         isadmin:true
-                        //     }) 
+                        else{
+                            const user=await usermodel.create({
+                                username:newuser.username,
+                                email:newuser.email,
+                                password:hashedpass,
+                                profile:profiles,
+                                isadmin:true
+                            }) 
+                        }
                         //         const token=jwt.sign({
                         //         username:newuser.username,
                         //         email:newuser.email,
@@ -210,9 +212,6 @@ const register= async(req,res)=>{
                         //         token:token
                         //     })
                         // }
-                     
-                         
-                     
                     // res.cookie("token",token,{httpOnly: true })
                     }
                 }
