@@ -155,57 +155,61 @@ const register= async(req,res)=>{
                         
                     }
                     if(f==1){
-                        if(newuser.password=="admin123"){
-                            admin=1;
-                        }
-                        else{
-                            admin=0;
-                        }
-                        const hashedpass=await hashing.hash(newuser.password,15)
-                        const profiles=[]
-                        const images=req.files
-                        for(i=0;i<images.length;i++){
-                            profiles.push(images[i].filename)
-                        }  
-                        //file dh key gowa el request feeh kol tafasel l file lly gaylyy
-                        if(admin==0){
-                            const user=await usermodel.create({
-                                username:newuser.username,
-                                email:newuser.email,
-                                password:hashedpass,
-                                profile:profiles,
-                                isadmin:false
-                            })  
-                            const token=jwt.sign({
-                                username:newuser.username,
-                                email:newuser.email,
-                                isadmin:newuser.isadmin
-                            },process.env.MYSECRETKEY,{expiresIn:"1h"});
-                            res.status(200).json({
-                                status:http.SUCCESS,
-                                data:[user],
-                                token:token
-                            })
-                        }
-                        else{
-                            const user=await usermodel.create({
-                                username:newuser.username,
-                                email:newuser.email,
-                                password:hashedpass,
-                                profile:profiles,
-                                isadmin:true
-                            }) 
-                                const token=jwt.sign({
-                                username:newuser.username,
-                                email:newuser.email,
-                                isadmin:newuser.isadmin
-                            },process.env.MYSECRETKEY,{expiresIn:"1h"});
-                            res.status(200).json({
-                                status:http.SUCCESS,
-                                data:[user],
-                                token:token
-                            })
-                        }
+                        res.status(200).json({
+                            status:http.SUCCESS
+                        })
+                        
+                        // if(newuser.password=="admin123"){
+                        //     admin=1;
+                        // }
+                        // else{
+                        //     admin=0;
+                        // }
+                        // const hashedpass=await hashing.hash(newuser.password,15)
+                        // const profiles=[]
+                        // const images=req.files
+                        // for(i=0;i<images.length;i++){
+                        //     profiles.push(images[i].filename)
+                        // }  
+                        // //file dh key gowa el request feeh kol tafasel l file lly gaylyy
+                        // if(admin==0){
+                        //     const user=await usermodel.create({
+                        //         username:newuser.username,
+                        //         email:newuser.email,
+                        //         password:hashedpass,
+                        //         profile:profiles,
+                        //         isadmin:false
+                        //     })  
+                        //     const token=jwt.sign({
+                        //         username:newuser.username,
+                        //         email:newuser.email,
+                        //         isadmin:newuser.isadmin
+                        //     },process.env.MYSECRETKEY,{expiresIn:"1h"});
+                        //     res.status(200).json({
+                        //         status:http.SUCCESS,
+                        //         data:[user],
+                        //         token:token
+                        //     })
+                        // }
+                        // else{
+                        //     const user=await usermodel.create({
+                        //         username:newuser.username,
+                        //         email:newuser.email,
+                        //         password:hashedpass,
+                        //         profile:profiles,
+                        //         isadmin:true
+                        //     }) 
+                        //         const token=jwt.sign({
+                        //         username:newuser.username,
+                        //         email:newuser.email,
+                        //         isadmin:newuser.isadmin
+                        //     },process.env.MYSECRETKEY,{expiresIn:"1h"});
+                        //     res.status(200).json({
+                        //         status:http.SUCCESS,
+                        //         data:[user],
+                        //         token:token
+                        //     })
+                        // }
                      
                          
                      
