@@ -16,15 +16,15 @@ const { Admin } = require("mongodb");
 
 const reservetable= async(req,res)=>{
     const reservationDerails=req.body;
-    console.log(reservationDerails);
+ 
     const get=await reservationModel.find({date:reservationDerails.date},{"__v":false})
-    console.log("ddd"+get);
     if(get.length==0){
         const table =reservationModel.create({
             username:reservationDerails.username,
             date:reservationDerails.date,
             numberOfPersons:reservationDerails.numberOfPersons
         })
+        console.log(table);
         res.status(200).json({
             status:"Created succefully",
             data:table
