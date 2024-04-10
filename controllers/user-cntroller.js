@@ -12,6 +12,7 @@ const app = express();
 const generator = require('generate-password');
 const { Admin } = require("mongodb");
 
+
 let admin=0
 const getallusers= async(req,res)=>{
     const get=await usermodel.find({},{"__v":false})
