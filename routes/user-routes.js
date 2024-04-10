@@ -9,6 +9,8 @@ const { escape } = require("validator");
 const logAuth=require("../Middlewars/loginMiddleware.js");
 const regAuth=require("../Middlewars/registerMiddleware.js");
 const fileAuth=require("../Middlewars/fileMiddleware.js");
+const bookingcontroller=require("../controllers/tables-controller.js")
+const reservationMiddleware = require("../Middlewars/reservationMiddleware.js");
 
 
 router.route("/get")
@@ -26,6 +28,9 @@ router.route("/reset-password")
 router.route("/register")
 // .post(uploads.array("profile",10),fileAuth,regAuth,UserController.register)
 .post(UserController.register)
+
+router.route("/reserveTable").
+post(reservationMiddleware,bookingcontroller.reservetable)
 
 
 //single takes tha name at the form

@@ -1,5 +1,5 @@
 const mongoose=require("mongoose");
-const productschema=new mongoose.Schema({
+const bookingschema=new mongoose.Schema({
 
     username : {type : String, required: true},
     date : {type :String,required:true},
