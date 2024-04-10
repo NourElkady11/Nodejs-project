@@ -19,7 +19,7 @@ const reservetable= async(req,res)=>{
  
     const get=await reservationModel.find({date:reservationDerails.date},{"__v":false})
     if(get.length==0){
-            const table =reservationModel.create({
+            const table = await reservationModel.create({
             username:reservationDerails.username,
             date:reservationDerails.date,
             numberOfPersons:reservationDerails.numberOfPersons
@@ -27,7 +27,7 @@ const reservetable= async(req,res)=>{
         console.log(table);
         res.status(200).json({
             status:"Created succefully",
-            data:[table]
+            data:table
         })
     }
     else{
