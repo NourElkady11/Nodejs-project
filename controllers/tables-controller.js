@@ -16,7 +16,6 @@ const { Admin } = require("mongodb");
 
 const reservetable= async(req,res)=>{
     const reservationDerails=req.body;
- 
     const get=await reservationModel.find({date:reservationDerails.date},{"__v":false})
     if(get.length==0){
             const table = await reservationModel.create({

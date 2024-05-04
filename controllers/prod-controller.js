@@ -110,13 +110,13 @@ const Addproducts=async(req, res) => {
 }
 
 const updateProduct = async (req,res)=>{
-
+        const id=req.params.id
+        const value=req.body
     try{
         const update= await pmodel.updateMany(
-            {"tittle":"iphone-14pro"},
+            {id:id},
             {
-                "price":1000000,
-                "tittle":"iphone-14pro-updated",
+              value
             }
             
             //?set m4 lazem f mongoose 

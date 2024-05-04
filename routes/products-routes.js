@@ -12,8 +12,8 @@ router.route("/get")
 .get(controller.Getalldata);
 
 
-router.route("/products")
-.patch(controller.updateProduct)
+router.route("/products/:id")
+.put(controller.updateProduct)
 .delete(controller.DeleteProd)
 .get(controller.gettingSingleprod)
 .post(uploads.array("images",10),fileAuth,prodAuth,controller.Addproducts)
