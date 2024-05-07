@@ -11,12 +11,20 @@ const uploads=require("../Middlewars/uploadsMiddleware.js");
 router.route("/get")
 .get(controller.Getalldata);
 
+router.route("/products/:tittle")
+.put(controller.updateManyProduct)
 
-router.route("/products/:id")
-.put(controller.updateProduct)
-.delete(controller.DeleteProd)
+router.route("/products/:tittle")
+.delete(controller.DeleteManyProd)
+
+router.route("/products/Add")
+.post(/*uploads.array("images",10),fileAuth,prodAuth,*/controller.Addproducts)
+
+router.route("/product/:id")
+.put(controller.updateOneProduct)
+.delete(controller.DeleteOneProd)
 .get(controller.gettingSingleprod)
-.post(uploads.array("images",10),fileAuth,prodAuth,controller.Addproducts)
+
 
 
 module.exports=router

@@ -7,5 +7,5 @@ const bookingschema=new mongoose.Schema({
    
 
 }) 
- 
+
 module.exports=mongoose.model("tables",bookingschema)  

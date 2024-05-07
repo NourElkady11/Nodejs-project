@@ -13,7 +13,7 @@ const Getalldata= async (req,res)=>{
         const page=req.query.page || 1;
         const skip=(page -1 )*limit
 
-        const get = await pmodel.find({}).limit(limit).skip(skip)
+        const get = await pmodel.find({})/* .limit(limit).skip(skip)*/
 
         if(get.length==0){
             res.status(404).json({
@@ -43,18 +43,17 @@ const Getalldata= async (req,res)=>{
 
 
 const gettingSingleprod=async(req,res)=>{
-
     try{
-        const tittle=req.body.tittle;
-
+        const id=req.params.id
         const get = await pmodel.find({
-            tittle: tittle
-        }).select({"_id":0,"price":1})
+            _id: id
+        }).select({"_id":0})
 
         if(get.length==0){
             res.status(404).json({
                 "status":HTTP.FAIL,
                 "data":[]
+               
             })
         }
         else{
@@ -79,20 +78,20 @@ const gettingSingleprod=async(req,res)=>{
 const Addproducts=async(req, res) => { 
      
     try{
+        // const imgs=[]
+        // const images=req.files
+        // for(i=0;i<images.length;i++){
+            //     imgs.push(images[i].filename)
+            // } 
+            // console.log(imgs);
+            
+            //a5er 5atwaaaa wnta bat7ot sora fel databasee
         const newproduct=req.body;
-        const imgs=[]
-        const images=req.files
-        for(i=0;i<images.length;i++){
-            imgs.push(images[i].filename)
-        } 
-        console.log(imgs);
-
-        //a5er 5atwaaaa wnta bat7ot sora fel databasee
         const document=await pmodel.create({
             tittle:newproduct.tittle,
             price:newproduct.price,
             status:newproduct.status,
-            images:imgs
+            // images:imgs
         });
         console.log(document);
             res.status(200).json({
@@ -108,24 +107,57 @@ const Addproducts=async(req, res) => {
 
     }
 }
+const updateOneProduct = async (req,res)=>{
+    const id=req.params.id
+    const value=req.body
+try{
+    const update= await pmodel.updateOne(
+        {_id:id},
+        {
+          value
+        }
+        
+        //?set m4 lazem f mongoose 
+    ) 
+    if(update.length==0){
+        res.status(404).json({
+            "status":HTTP.FAIL,
+            "data":[update],
+        })
+    }
+    else{
+        res.status(200).json({
+            "status":HTTP.SUCCESS,
+            "data":[update]
+        })
+    }
+    res.end()
 
-const updateProduct = async (req,res)=>{
-        const id=req.params.id
+}
+catch{
+    res.status(404).json({
+        "status":HTTP.ERROR,
+        "message":"Server falied"
+    })
+
+}
+
+}
+
+const updateManyProduct = async (req,res)=>{
+      const tittle=req.params.tittle
         const value=req.body
     try{
         const update= await pmodel.updateMany(
-            {id:id},
-            {
-              value
-            }
-            
+            {tittle:tittle},
+            { $set: value }
+
             //?set m4 lazem f mongoose 
         ) 
-
         if(update.length==0){
             res.status(404).json({
                 "status":HTTP.FAIL,
-                "data":[]
+                "data":[update],
             })
         }
         else{
@@ -135,7 +167,6 @@ const updateProduct = async (req,res)=>{
             })
         }
         res.end()
-
     }
     catch{
         res.status(404).json({
@@ -145,15 +176,14 @@ const updateProduct = async (req,res)=>{
 
     }
 
-
 }
 
 
 
-const DeleteProd= async(req,res)=>{
-    
+const DeleteOneProd= async(req,res)=>{
     try{
-        const del=await pmodel.deleteMany({"tittle":null})
+        const id=req.params.id
+        const del=await pmodel.deleteMany({_id:id})
         if(del.length==0){
             res.status(404).json({
                 "status":HTTP.FAIL,
@@ -179,13 +209,45 @@ const DeleteProd= async(req,res)=>{
 
     
 }
+const DeleteManyProd= async(req,res)=>{
+    try{
+        const tittle=req.params.tittle
+        const del=await pmodel.deleteMany({tittle:tittle})
+        if(del.length==0){
+            res.status(404).json({
+                "status":HTTP.FAIL,
+                "data":[]
+            })
+        }
+        else{
+            res.status(200).json({
+                "status":HTTP.SUCCESS,
+                "data":[del]
+            })
+        }
+        res.end()
+
+    }
+    catch{
+        res.status(404).json({
+            "status":HTTP.ERROR,
+            "message":"Server falied"
+        })
+
+    }
+
+    
+}
+
 module.exports={
     runningServer,
     Addproducts,
     gettingSingleprod,
-    updateProduct,
-    DeleteProd,
-    Getalldata
+    updateManyProduct,
+    DeleteManyProd,
+    DeleteOneProd,
+    Getalldata,
+    updateOneProduct
 }
 // function knapsack(p,wt,m){
 //     n=p.length;
