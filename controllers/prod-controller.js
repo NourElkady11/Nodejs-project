@@ -5,14 +5,12 @@ const runningServer=()=>{
     console.log("server is running");
 };
 
-const Getalldata= async (req,res)=>{
-   
+const Getalldata=async (req,res)=>{
     try{
         // pagination
         const limit=req.query.limit || 10;
         const page=req.query.page || 1;
         const skip=(page -1 )*limit
-
         const get = await pmodel.find({})/* .limit(limit).skip(skip)*/
 
         if(get.length==0){
@@ -76,7 +74,7 @@ const gettingSingleprod=async(req,res)=>{
 }
 
 const Addproducts=async(req, res) => { 
-     
+
     try{
         // const imgs=[]
         // const images=req.files
@@ -113,8 +111,14 @@ const updateOneProduct = async (req,res)=>{
 try{
     const update= await pmodel.updateOne(
         {_id:id},
+        // {
+        //   value
+        // }
         {
-          value
+            _id:value._id,
+            tittle:value.tittle,
+            price:value.price,
+            status:value.status,
         }
         
         //?set m4 lazem f mongoose 
@@ -126,6 +130,7 @@ try{
         })
     }
     else{
+        console.log(update);
         res.status(200).json({
             "status":HTTP.SUCCESS,
             "data":[update]
